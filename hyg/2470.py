@@ -33,9 +33,9 @@ while start < end:
         answer.append(solutions[end])
     
     if sum < 0:
-        start += 1
+        start = start + 1
     else:
-        end -= 1
+        end = end - 1
 
 answer = sorted(answer)
 print(answer[0], answer[1])
