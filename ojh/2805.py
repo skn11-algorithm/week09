@@ -11,15 +11,22 @@ def cut(trees,n):
         get+=(trees[i]-n if trees[i]-n>=0 else 0)
     return get
 
+start=0
+end=max(trees)
 
-max_tree=max(trees)
-arr=[0]*max_tree
+result=0
+while start<=end:
+    mid=(start+end)//2
+    get=cut(trees,mid)
+    
+    if get<M: # 가져가야 하는 길이보다 짧으면, 절단높이 줄여야함
+        end=mid-1
+    else:
+        result=mid # 절단 높이 최댓값 구해야하므로 계속 갱신
+        start=mid+1
 
-for i in range(1,max_tree):
-    arr[i]=cut(trees,i)
+print(result)
 
-    if arr[i]==M:
-        print(i)
-        break
+
 
 
