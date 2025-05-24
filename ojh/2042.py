@@ -18,6 +18,16 @@ def make_tree(start,end,index):
 
     return tree[index]
 
+def update_tree(start, end, index, target, diff):
+    if target < start or target > end:
+        return
+    
+    tree[index] += diff  # 변화량 반영
+    if start != end:
+        mid = (start + end) // 2
+        update_tree(start, mid, index*2, target, diff)
+        update_tree(mid+1, end, index*2+1, target, diff)
+
 def find(start,end,index,left,right):
     if left>end or right<start:
         return 0 # 합 연산에 영향 X
@@ -33,11 +43,12 @@ def find(start,end,index,left,right):
 
     return left_child+right_child
 
-
+make_tree(1, N, 1) 
 for _ in range(M+K):
     a,b,c=map(int,input().rstrip().split())
     if a==1:
-        nums[b]=c
-        make_tree(1,N,1)
+        diff=c-nums[b]
+        nums[b] = c
+        update_tree(1,N,1,b,diff)
     elif a==2:
         print(find(1,N,1,b,c))
