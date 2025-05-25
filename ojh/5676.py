@@ -58,7 +58,7 @@ try:
         N, K = map(int, line.split()) #숫자개수, 명령개수
         nums = [0] + list(map(int,input().rstrip().split()))
         tree = [0] * (4 * N)
-        init(0,N,1)
+        init(1,N,1)
 
         result=[]
         for _ in range(K):
